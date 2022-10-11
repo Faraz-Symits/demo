@@ -1,0 +1,6 @@
+Site Title: The Demo
+Username: adminfarazhashmi
+Password: iurvAe0jIi0m1Wm!qM
+Admin Email: frazahashmi.symits@gmail.com
+Database: demodb
+Table Prefix: wp_demo_
