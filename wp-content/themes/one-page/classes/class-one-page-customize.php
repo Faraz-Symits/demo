@@ -3,22 +3,22 @@
  * Customizer settings for this theme.
  *
  * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
+ * @subpackage one_page_
+ * @since one_page_ 1.0
  */
 
 if ( ! class_exists( 'One_Page_Customize' ) ) {
 	/**
 	 * Customizer Settings.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since one_page_ 1.0
 	 */
 	class One_Page_Customize {
 
 		/**
 		 * Constructor. Instantiate the object.
 		 *
-		 * @since Twenty Twenty-One 1.0
+		 * @since one_page_ 1.0
 		 */
 		public function __construct() {
 			add_action( 'customize_register', array( $this, 'register' ) );
@@ -27,7 +27,7 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 		/**
 		 * Register customizer options.
 		 *
-		 * @since Twenty Twenty-One 1.0
+		 * @since one_page_ 1.0
 		 *
 		 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
 		 * @return void
@@ -72,7 +72,7 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 				array(
 					'type'    => 'checkbox',
 					'section' => 'title_tagline',
-					'label'   => esc_html__( 'Display Site Title & Tagline', 'twentytwentyone' ),
+					'label'   => esc_html__( 'Display Site Title & Tagline', 'onepage' ),
 				)
 			);
 
@@ -82,7 +82,7 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 			$wp_customize->add_section(
 				'excerpt_settings',
 				array(
-					'title'    => esc_html__( 'Excerpt Settings', 'twentytwentyone' ),
+					'title'    => esc_html__( 'Excerpt Settings', 'onepage' ),
 					'priority' => 120,
 				)
 			);
@@ -103,17 +103,17 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 				array(
 					'type'    => 'radio',
 					'section' => 'excerpt_settings',
-					'label'   => esc_html__( 'On Archive Pages, posts show:', 'twentytwentyone' ),
+					'label'   => esc_html__( 'On Archive Pages, posts show:', 'onepage' ),
 					'choices' => array(
-						'excerpt' => esc_html__( 'Summary', 'twentytwentyone' ),
-						'full'    => esc_html__( 'Full text', 'twentytwentyone' ),
+						'excerpt' => esc_html__( 'Summary', 'onepage' ),
+						'full'    => esc_html__( 'Full text', 'onepage' ),
 					),
 				)
 			);
 
 			// Background color.
 			// Include the custom control class.
-			include_once get_theme_file_path( 'classes/class-twenty-twenty-one-customize-color-control.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
+			include_once get_theme_file_path( 'classes/class-one-page-customize-color-control.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
 			// Register the custom control.
 			$wp_customize->register_control_type( 'One_Page_Customize_Color_Control' );
@@ -135,7 +135,7 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 					$wp_customize,
 					'background_color',
 					array(
-						'label'   => esc_html_x( 'Background color', 'Customizer control', 'twentytwentyone' ),
+						'label'   => esc_html_x( 'Background color', 'Customizer control', 'onepage' ),
 						'section' => 'colors',
 						'palette' => $colors,
 					)
@@ -146,7 +146,7 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 		/**
 		 * Sanitize boolean for checkbox.
 		 *
-		 * @since Twenty Twenty-One 1.0
+		 * @since one_page_ 1.0
 		 *
 		 * @param bool $checked Whether or not a box is checked.
 		 * @return bool
@@ -158,7 +158,7 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 		/**
 		 * Render the site title for the selective refresh partial.
 		 *
-		 * @since Twenty Twenty-One 1.0
+		 * @since one_page_ 1.0
 		 *
 		 * @return void
 		 */
@@ -169,7 +169,7 @@ if ( ! class_exists( 'One_Page_Customize' ) ) {
 		/**
 		 * Render the site tagline for the selective refresh partial.
 		 *
-		 * @since Twenty Twenty-One 1.0
+		 * @since one_page_ 1.0
 		 *
 		 * @return void
 		 */

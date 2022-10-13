@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage One_Page
- * @since Twenty Twenty-One 1.0
+ * @since One_Page 1.0
  */
 
 /**
@@ -15,7 +15,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Instantiate the object.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 */
 	public function __construct() {
 
@@ -32,7 +32,7 @@ class One_Page_Dark_Mode {
 		add_action( 'customize_register', array( $this, 'customizer_controls' ) );
 
 		// Add HTML classes.
-		add_filter( 'twentytwentyone_html_classes', array( $this, 'html_classes' ) );
+		add_filter( 'onepage_html_classes', array( $this, 'html_classes' ) );
 
 		// Add classes to <body> in the dashboard.
 		add_filter( 'admin_body_class', array( $this, 'admin_body_classes' ) );
@@ -47,7 +47,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Editor custom color variables & scripts.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @return void
 	 */
@@ -60,12 +60,12 @@ class One_Page_Dark_Mode {
 		if ( $should_respect_color_scheme && One_Page_Custom_Colors::get_relative_luminance_from_hex( $background_color ) > 127 ) {
 			// Add Dark Mode variable overrides.
 			wp_add_inline_style(
-				'twenty-twenty-one-custom-color-overrides',
+				'one-page-custom-color-overrides',
 				'.is-dark-theme.is-dark-theme .editor-styles-wrapper { --global--color-background: var(--global--color-dark-gray); --global--color-primary: var(--global--color-light-gray); --global--color-secondary: var(--global--color-light-gray); --button--color-text: var(--global--color-background); --button--color-text-hover: var(--global--color-secondary); --button--color-text-active: var(--global--color-secondary); --button--color-background: var(--global--color-secondary); --button--color-background-active: var(--global--color-background); --global--color-border: #9ea1a7; --table--stripes-border-color: rgba(240, 240, 240, 0.15); --table--stripes-background-color: rgba(240, 240, 240, 0.15); }'
 			);
 		}
 		wp_enqueue_script(
-			'twentytwentyone-dark-mode-support-toggle',
+			'onepage-dark-mode-support-toggle',
 			get_template_directory_uri() . '/assets/js/dark-mode-toggler.js',
 			array(),
 			'1.0.0',
@@ -73,9 +73,9 @@ class One_Page_Dark_Mode {
 		);
 
 		wp_enqueue_script(
-			'twentytwentyone-editor-dark-mode-support',
+			'onepage-editor-dark-mode-support',
 			get_template_directory_uri() . '/assets/js/editor-dark-mode-support.js',
-			array( 'twentytwentyone-dark-mode-support-toggle' ),
+			array( 'onepage-dark-mode-support-toggle' ),
 			'1.0.0',
 			true
 		);
@@ -84,7 +84,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Enqueue scripts and styles.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @return void
 	 */
@@ -96,13 +96,13 @@ class One_Page_Dark_Mode {
 		if ( is_rtl() ) {
 			$url = get_template_directory_uri() . '/assets/css/style-dark-mode-rtl.css';
 		}
-		wp_enqueue_style( 'tt1-dark-mode', $url, array( 'twenty-twenty-one-style' ), wp_get_theme()->get( 'Version' ) ); // @phpstan-ignore-line. Version is always a string.
+		wp_enqueue_style( 'tt1-dark-mode', $url, array( 'one-page-style' ), wp_get_theme()->get( 'Version' ) ); // @phpstan-ignore-line. Version is always a string.
 	}
 
 	/**
 	 * Enqueue scripts for the customizer.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @return void
 	 */
@@ -111,9 +111,9 @@ class One_Page_Dark_Mode {
 			return;
 		}
 		wp_enqueue_script(
-			'twentytwentyone-customize-controls',
+			'onepage-customize-controls',
 			get_template_directory_uri() . '/assets/js/customize.js',
-			array( 'customize-base', 'customize-controls', 'underscore', 'jquery', 'twentytwentyone-customize-helpers' ),
+			array( 'customize-base', 'customize-controls', 'underscore', 'jquery', 'onepage-customize-helpers' ),
 			'1.0.0',
 			true
 		);
@@ -122,7 +122,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Register customizer options.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
 	 * @return void
@@ -131,11 +131,11 @@ class One_Page_Dark_Mode {
 
 		$colors_section = $wp_customize->get_section( 'colors' );
 		if ( is_object( $colors_section ) ) {
-			$colors_section->title = __( 'Colors & Dark Mode', 'twentytwentyone' );
+			$colors_section->title = __( 'Colors & Dark Mode', 'onepage' );
 		}
 
 		// Custom notice control.
-		include_once get_theme_file_path( 'classes/class-twenty-twenty-one-customize-notice-control.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
+		include_once get_theme_file_path( 'classes/class-one-page-customize-notice-control.php' ); // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
 		$wp_customize->add_setting(
 			'respect_user_color_preference_notice',
@@ -173,19 +173,19 @@ class One_Page_Dark_Mode {
 
 		$description  = '<p>';
 		$description .= sprintf(
-			/* translators: %s: Twenty Twenty-One support article URL. */
-			__( 'Dark Mode is a device setting. If a visitor to your site requests it, your site will be shown with a dark background and light text. <a href="%s">Learn more about Dark Mode.</a>', 'twentytwentyone' ),
-			esc_url( __( 'https://wordpress.org/support/article/twenty-twenty-one/#dark-mode-support', 'twentytwentyone' ) )
+			/* translators: %s: One_Page support article URL. */
+			__( 'Dark Mode is a device setting. If a visitor to your site requests it, your site will be shown with a dark background and light text. <a href="%s">Learn more about Dark Mode.</a>', 'onepage' ),
+			esc_url( __( 'https://wordpress.org/support/article/one-page/#dark-mode-support', 'onepage' ) )
 		);
 		$description .= '</p>';
-		$description .= '<p>' . __( 'Dark Mode can also be turned on and off with a button that you can find in the bottom corner of the page.', 'twentytwentyone' ) . '</p>';
+		$description .= '<p>' . __( 'Dark Mode can also be turned on and off with a button that you can find in the bottom corner of the page.', 'onepage' ) . '</p>';
 
 		$wp_customize->add_control(
 			'respect_user_color_preference',
 			array(
 				'type'            => 'checkbox',
 				'section'         => 'colors',
-				'label'           => esc_html__( 'Dark Mode support', 'twentytwentyone' ),
+				'label'           => esc_html__( 'Dark Mode support', 'onepage' ),
 				'priority'        => 110,
 				'description'     => $description,
 				'active_callback' => static function( $value ) {
@@ -211,7 +211,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Calculate classes for the main <html> element.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @param string $classes The classes for <html> element.
 	 * @return string
@@ -233,7 +233,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Adds a class to the <body> element in the editor to accommodate dark-mode.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @param string $classes The admin body-classes.
 	 * @return string
@@ -253,7 +253,7 @@ class One_Page_Dark_Mode {
 			$background_color            = get_theme_mod( 'background_color', 'D1E4DD' );
 
 			if ( $should_respect_color_scheme && One_Page_Custom_Colors::get_relative_luminance_from_hex( $background_color ) > 127 ) {
-				$classes .= ' twentytwentyone-supports-dark-theme';
+				$classes .= ' onepage-supports-dark-theme';
 			}
 		}
 
@@ -263,7 +263,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Determine if we want to print the dark-mode switch or not.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @return bool
 	 */
@@ -279,7 +279,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Add night/day switch.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @return void
 	 */
@@ -296,7 +296,7 @@ class One_Page_Dark_Mode {
 	 *
 	 * Inspired from https://codepen.io/aaroniker/pen/KGpXZo (MIT-licensed)
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @param array $attrs The attributes to add to our <button> element.
 	 * @return void
@@ -318,7 +318,7 @@ class One_Page_Dark_Mode {
 		echo '>';
 		printf(
 			/* translators: %s: On/Off */
-			esc_html__( 'Dark Mode: %s', 'twentytwentyone' ),
+			esc_html__( 'Dark Mode: %s', 'onepage' ),
 			'<span aria-hidden="true"></span>'
 		);
 		echo '</button>';
@@ -328,10 +328,10 @@ class One_Page_Dark_Mode {
 				margin-<?php echo is_rtl() ? 'right' : 'left'; ?>: 5px;
 			}
 			#dark-mode-toggler > span::before {
-				content: '<?php esc_attr_e( 'Off', 'twentytwentyone' ); ?>';
+				content: '<?php esc_attr_e( 'Off', 'onepage' ); ?>';
 			}
 			#dark-mode-toggler[aria-pressed="true"] > span::before {
-				content: '<?php esc_attr_e( 'On', 'twentytwentyone' ); ?>';
+				content: '<?php esc_attr_e( 'On', 'onepage' ); ?>';
 			}
 			<?php if ( is_admin() || wp_is_json_request() ) : ?>
 				.components-editor-notices__pinned ~ .edit-post-visual-editor #dark-mode-toggler {
@@ -354,7 +354,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Print the dark-mode switch script.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @return void
 	 */
@@ -367,7 +367,7 @@ class One_Page_Dark_Mode {
 	/**
 	 * Adds information to the privacy policy.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since One_Page 1.0
 	 *
 	 * @return void
 	 */
@@ -375,10 +375,10 @@ class One_Page_Dark_Mode {
 		if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
 			return;
 		}
-		$content = '<p class="privacy-policy-tutorial">' . __( 'Twenty Twenty-One uses LocalStorage when Dark Mode support is enabled.', 'twentytwentyone' ) . '</p>'
-				. '<strong class="privacy-policy-tutorial">' . __( 'Suggested text:', 'twentytwentyone' ) . '</strong> '
-				. __( 'This website uses LocalStorage to save the setting when Dark Mode support is turned on or off.<br> LocalStorage is necessary for the setting to work and is only used when a user clicks on the Dark Mode button.<br> No data is saved in the database or transferred.', 'twentytwentyone' );
-		wp_add_privacy_policy_content( 'Twenty Twenty-One', wp_kses_post( wpautop( $content, false ) ) );
+		$content = '<p class="privacy-policy-tutorial">' . __( 'One_Page uses LocalStorage when Dark Mode support is enabled.', 'onepage' ) . '</p>'
+				. '<strong class="privacy-policy-tutorial">' . __( 'Suggested text:', 'onepage' ) . '</strong> '
+				. __( 'This website uses LocalStorage to save the setting when Dark Mode support is turned on or off.<br> LocalStorage is necessary for the setting to work and is only used when a user clicks on the Dark Mode button.<br> No data is saved in the database or transferred.', 'onepage' );
+		wp_add_privacy_policy_content( 'One_Page', wp_kses_post( wpautop( $content, false ) ) );
 	}
 
 }
