@@ -25,10 +25,15 @@
                 <a class="navbar-brand" href="#page-top"><?php bloginfo('name'); ?></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
+                    <?php wp_nav_menu([
+                            'menu_class' => 'navbar-nav ms-auto', // (string) CSS class to use for the ul element which forms the menu. Default 'menu'.
+                            'container_class' => 'collapse navbar-collapse', // (string) Class that is applied to the container. Default 'menu-{menu slug}-container'.
+                            'theme_location' => 'primary', // (string) Theme location to be used. Must be registered with register_nav_menu() in order to be selectable by the user.
+                    ]); ?>
+                    <!-- <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </nav>
