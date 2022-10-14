@@ -10,3 +10,6 @@ Reading is easier, too, in the new Reading view. You can collapse parts of the d
 
 
 Git Documentation: https://docs.github.com/en
+Make a WordPress Website: https://www.wpbeginner.com/guides/
+WordPress Security Guide: https://www.wpbeginner.com/wordpress-security/
+Ultimate WordPress SEO: https://www.wpbeginner.com/wordpress-seo/
