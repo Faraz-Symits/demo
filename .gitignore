@@ -1,2 +1,5 @@
 # PHP Files
 wp-config.php
+
+#HtAccess
+.htaccess
